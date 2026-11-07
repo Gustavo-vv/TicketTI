@@ -1,4 +1,4 @@
-import Chamado from "../models/chamadoModel.js";
+import { Chamado } from "../models/Chamado.js";
 
 const chamadoController = {
   all: async (req, res) => {

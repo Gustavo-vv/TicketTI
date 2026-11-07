@@ -1,1 +1,47 @@
-GET 
+### Chamados
+GET http://localhost:3000/chamados
+### Chamados por ID
+GET http://localhost:3000/chamados/1
+### Chamados por Status
+GET http://localhost:3000/chamados?status=Aberto
+### Chamados por Título
+POST http://localhost:3000/chamados
+Content-Type: application/json
+{
+  "titulo": "Notebook com defeito",
+  "descricao": "Notebook não liga e apresenta tela azul",
+  "status": "Aberto"
+}
+### Chamados Atualizados
+PUT http://localhost:3000/chamados/1
+Content-Type: application/json
+{
+  "titulo": "Notebook com defeito",
+  "descricao": "Notebook não liga e apresenta tela azul",
+  "status": "Em andamento"
+}
+### Chamados Deletados
+DELETE http://localhost:3000/chamados/1
+
+## Pagina Home
+GET http://localhost:3000/public
+## Usuarios
+GET http://localhost:3000/usuarios
+## Usuarios por ID
+GET http://localhost:3000/usuarios/1
+## Criar Usuario
+POST http://localhost:3000/usuarios
+Content-Type: application/json
+{
+  "nome": "Gustavo Veloso",
+  "email": "gustavovieiraveloso8@gmail.com"
+}  
+### Atualizar Usuario
+PUT http://localhost:3000/usuarios/1
+Content-Type: application/json
+{
+  "nome": "Gustavo Vieira Veloso",
+  "email": "gustavovieiraveloso8@gmail.com"
+}
+### Deletar Usuario
+DELETE http://localhost:3000/usuarios/1
