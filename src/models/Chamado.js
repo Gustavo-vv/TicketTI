@@ -2,8 +2,16 @@ import { prisma } from '../config/prisma.js';
 
 export class Chamado {
   static async findAll() {
-    return await prisma.chamado.findMany();
-  }
+    return await prisma.chamado.findMany({
+        include: {
+            usuario: true,
+            categoria: true
+        },
+        orderBy: {
+            criadoEm: 'desc'
+        }
+    });
+}
 
   static async findById(id) {
     return await prisma.chamado.findUnique({

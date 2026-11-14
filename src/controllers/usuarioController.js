@@ -2,7 +2,6 @@ import  Usuario  from "../models/Usuario.js";
 
 
 const usuarioController = {
-    // Listar todos os usuários
     all: async (req, res) => {
         try {
             const usuarios = await Usuario.findAll();
@@ -16,7 +15,6 @@ const usuarioController = {
         }
     },
 
-    // Buscar usuário pelo ID
     findById: async (req, res) => {
         try {
             const usuario = await Usuario.findById(req.params.id);
@@ -35,8 +33,6 @@ const usuarioController = {
             });
         }
     },
-
-    // Cadastrar usuário
         
 create: async (req, res) => {
     try {

@@ -1,0 +1,53 @@
+
+<aside class="sidebar">
+
+    <div class="brand">
+        <div class="brand-icon">
+            <i class="bi bi-headset"></i>
+        </div>
+
+        <span>Ticket<span class="brand-highlight">TI</span></span>
+    </div>
+
+    <div class="menu-label">MENU PRINCIPAL</div>
+
+    <nav class="menu">
+
+        <a href="/" class="menu-item <%= paginaAtiva === 'dashboard' ? 'active' : '' %>">
+            <i class="bi bi-grid-1x2-fill"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="/chamados" class="menu-item <%= paginaAtiva === 'chamados' ? 'active' : '' %>">
+            <i class="bi bi-ticket-perforated"></i>
+            <span>Chamados</span>
+        </a>
+
+        <a href="/usuarios" class="menu-item <%= paginaAtiva === 'usuarios' ? 'active' : '' %>">
+            <i class="bi bi-people"></i>
+            <span>Usuários</span>
+        </a>
+
+        <a href="/categorias" class="menu-item <%= paginaAtiva === 'categorias' ? 'active' : '' %>">
+            <i class="bi bi-tags"></i>
+            <span>Categorias</span>
+        </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+        <div class="profile-icon">
+            <i class="bi bi-person-fill"></i>
+        </div>
+
+        <div class="profile-info">
+            <strong>Administrador</strong>
+            <small>Suporte TI</small>
+        </div>
+
+        <i class="bi bi-three-dots"></i>
+
+    </div>
+
+</aside>

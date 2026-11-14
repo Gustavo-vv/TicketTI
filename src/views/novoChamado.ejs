@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Novo chamado | TicketTI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+     <div class="layout">
+
+        <%- include('partials/sidebar', { paginaAtiva: 'chamados' }) %>
+
+        <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <h1>Novo chamado</h1>
+                <p>Preencha os dados para registrar uma solicitação.</p>
+            </div>
+
+            <div class="header-actions">
+    <a href="/" class="secondary-button">
+        Voltar ao Dashboard
+    </a>
+
+    <a href="/chamados" class="primary-button">
+        Voltar aos chamados
+    </a>
+</div>
+        </header>
+
+        <section class="content-section">
+
+            <div class="section-header">
+                <div>
+                    <h2>Informações do chamado</h2>
+                    <p>Informe os detalhes da solicitação de suporte.</p>
+                </div>
+            </div>
+
+            <form id="formChamado" class="form-chamado">
+
+                <div class="form-group">
+                    <label for="titulo">Título do chamado</label>
+
+                    <input
+                        type="text"
+                        id="titulo"
+                        placeholder="Ex: Computador não liga"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="descricao">Descrição</label>
+
+                    <textarea
+                        id="descricao"
+                        rows="5"
+                        placeholder="Descreva o problema..."
+                        required
+                    ></textarea>
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="prioridade">Prioridade</label>
+
+                        <select id="prioridade" required>
+                            <option value="BAIXA">Baixa</option>
+                            <option value="MEDIA" selected>Média</option>
+                            <option value="ALTA">Alta</option>
+                            <option value="URGENTE">Urgente</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="usuarioId">Solicitante</label>
+
+                        <select id="usuarioId" required>
+                            <option value="">Selecione um usuário</option>
+
+                            <% usuarios.forEach(usuario => { %>
+                                <option value="<%= usuario.id %>">
+                                    <%= usuario.nome %>
+                                </option>
+                            <% }) %>
+                        </select>
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="categoriaId">Categoria</label>
+
+                    <select id="categoriaId" required>
+                        <option value="">Selecione uma categoria</option>
+
+                        <% categorias.forEach(categoria => { %>
+                            <option value="<%= categoria.id %>">
+                                <%= categoria.nome %>
+                            </option>
+                        <% }) %>
+                    </select>
+                </div>
+
+                <div id="mensagemFormulario" class="mensagem-formulario" hidden></div>
+
+                <div class="form-actions">
+
+                    <a href="/chamados" class="secondary-button">
+                        Cancelar
+                    </a>
+
+                    <button type="submit" class="primary-button" id="btnSalvar">
+                        Cadastrar chamado
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/novoChamado.js"></script>
+
+</body>
+</html>

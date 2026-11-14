@@ -7,7 +7,7 @@ POST {{baseUrl}}/categorias
 Content-Type: application/json
 
 {
-  "nome": "Hardwareee"
+  "nome": "Notebooks e Acessórios"
 }
 
 ### Listar categorias
@@ -55,8 +55,8 @@ Content-Type: application/json
   "titulo": "Notebook com defeito",
   "descricao": "Notebook não liga e apresenta tela azul",
   "prioridade": "ALTA",
-  "usuarioId":1,
-  "categoriaId": 1
+  "usuarioId":3,
+  "categoriaId": 7
 }
 
 ### Listar chamados

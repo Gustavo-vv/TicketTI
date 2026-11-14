@@ -6,30 +6,41 @@ const chamadoController = {
       const chamados = await Chamado.findAll();
       res.status(200).json(chamados);
     } catch (error) {
-      res.status(500).json({ message: "Erro ao buscar chamados!" });
+      res.status(500).json({ message: "Erro ao buscar chamados!", detalhe: error.message });
     }
   },
 
   findById: async (req, res) => {
     try {
       const chamado = await Chamado.findById(req.params.id);
+
       if (!chamado) {
-        return res.status(404).json({ message: "Chamado Não Encontrado!" });
+        return res.status(404).json({ message: "Chamado Não Encontrado!", });
       }
       res.status(200).json(chamado);
     } catch (error) {
-      res.status(500).json({ message: "Erro ao buscar chamado!" });
+      res.status(500).json({ message: "Erro ao buscar chamado!", detalhe: error.message });
     }
   },
 
   create: async (req, res) => {
     try {
-      const chamado = await Chamado.create(req.body);
-      res.status(201).json(chamado);
-    }  catch (error) {
-  console.error(error);
-  res.status(400).json({ message: "Erro ao criar chamado!", detalhe: error.message });
-}
+
+        console.log("Dados recebidos:", req.body);
+
+        const chamado = await Chamado.create(req.body);
+
+        res.status(201).json(chamado);
+
+    } catch (error) {
+        console.error(error);
+
+        res.status(400).json({
+            message: "Erro ao criar chamado!",
+            detalhe: error.message
+        });
+    }
+
   },  
 update: async (req, res) => {
     try {
