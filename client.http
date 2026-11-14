@@ -1,47 +1,118 @@
-### Chamados
-GET http://localhost:3000/chamados
-### Chamados por ID
-GET http://localhost:3000/chamados/1
-### Chamados por Status
-GET http://localhost:3000/chamados?status=Aberto
-### Chamados por Título
-POST http://localhost:3000/chamados
-Content-Type: application/json
-{
-  "titulo": "Notebook com defeito",
-  "descricao": "Notebook não liga e apresenta tela azul",
-  "status": "Aberto"
-}
-### Chamados Atualizados
-PUT http://localhost:3000/chamados/1
-Content-Type: application/json
-{
-  "titulo": "Notebook com defeito",
-  "descricao": "Notebook não liga e apresenta tela azul",
-  "status": "Em andamento"
-}
-### Chamados Deletados
-DELETE http://localhost:3000/chamados/1
+@baseUrl = http://localhost:3000
 
-## Pagina Home
-GET http://localhost:3000/public
-## Usuarios
-GET http://localhost:3000/usuarios
-## Usuarios por ID
-GET http://localhost:3000/usuarios/1
-## Criar Usuario
-POST http://localhost:3000/usuarios
+### ========== CATEGORIAS ==========
+
+### Criar categoria
+# @name criarCategoria
+POST {{baseUrl}}/categorias
 Content-Type: application/json
+
 {
-  "nome": "Gustavo Veloso",
-  "email": "gustavovieiraveloso8@gmail.com"
-}  
-### Atualizar Usuario
-PUT http://localhost:3000/usuarios/1
+  "nome": "Hardwareee"
+}
+
+### Listar categorias
+GET {{baseUrl}}/categorias
+
+### Atualizar categoria
+PUT {{baseUrl}}/categorias/{{criarCategoria.response.body.id}}
 Content-Type: application/json
+
+{
+  "nome": "Hardware e Periféricos"
+}
+
+### ========== USUÁRIOS ==========
+
+### Criar usuário
+# @name criarUsuario
+POST {{baseUrl}}/usuarios/create
+Content-Type: application/json
+
+{
+  
+  "nome": "Gustavo Velosow",
+  "email": "gustavo3232@email.com",
+  "senha": "1234563d2@#"
+}
+
+### Listar usuários
+GET {{baseUrl}}/usuarios
+
+### Atualizar usuário
+PUT {{baseUrl}}/usuarios/{{criarUsuario.response.body.id}}
+Content-Type: application/json
+
 {
   "nome": "Gustavo Vieira Veloso",
-  "email": "gustavovieiraveloso8@gmail.com"
+  "email": "gustavo@email.com"
 }
-### Deletar Usuario
-DELETE http://localhost:3000/usuarios/1
+
+### ========== CHAMADOS ==========
+
+### Criar chamado
+# @name criarChamado
+POST {{baseUrl}}/chamados
+Content-Type: application/json
+
+{
+  "titulo": "Notebook com defeito",
+  "descricao": "Notebook não liga e apresenta tela azul",
+  "prioridade": "ALTA",
+  "usuarioId": {{criarUsuario.response.body.id}},
+  "categoriaId": {{criarCategoria.response.body.id}}
+}
+
+### Listar chamados
+GET {{baseUrl}}/chamados
+
+### Filtrar por status
+GET {{baseUrl}}/chamados?status=ABERTO
+
+### Buscar chamado por ID
+GET {{baseUrl}}/chamados/{{criarChamado.response.body.id}}
+
+### Atualizar chamado
+PUT {{baseUrl}}/chamados/{{criarChamado.response.body.id}}
+Content-Type: application/json
+
+{
+  "titulo": "Notebook com defeito (atualizado)",
+  "descricao": "Notebook não liga e apresenta tela azul",
+  "prioridade": "URGENTE"
+}
+
+### Mudar status: ABERTO para EM_ANDAMENTO
+PATCH {{baseUrl}}/chamados/{{criarChamado.response.body.id}}/status
+Content-Type: application/json
+
+{
+  "status": "EM_ANDAMENTO"
+}
+
+### Mudar status: EM_ANDAMENTO para RESOLVIDO
+PATCH {{baseUrl}}/chamados/{{criarChamado.response.body.id}}/status
+Content-Type: application/json
+
+{
+  "status": "RESOLVIDO"
+}
+
+### Teste do fluxo inválido (deve dar erro 400)
+PATCH {{baseUrl}}/chamados/{{criarChamado.response.body.id}}/status
+Content-Type: application/json
+
+{
+  "status": "ABERTO"
+}
+
+### ========== EXCLUSÕES (rode por último) ==========
+
+### Deletar chamado
+DELETE {{baseUrl}}/chamados/{{criarChamado.response.body.id}}
+
+### Deletar usuário
+DELETE {{baseUrl}}/usuarios/{{criarUsuario.response.body.id}}
+
+### Deletar categoria
+DELETE {{baseUrl}}/categorias/{{criarCategoria.response.body.id}}

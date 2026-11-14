@@ -1,55 +1,113 @@
-import { Usuario } from "../models/Usuario.js";
+import  Usuario  from "../models/Usuario.js";
+
 
 const usuarioController = {
+    // Listar todos os usuários
     all: async (req, res) => {
         try {
             const usuarios = await Usuario.findAll();
+
             return res.status(200).json(usuarios);
+
         } catch (error) {
-            return res.status(500).json({ mensagem: "Erro interno ao buscar usuários" });
+            return res.status(500).json({
+                mensagem: "Erro interno ao buscar usuários"
+            });
         }
     },
 
+    // Buscar usuário pelo ID
     findById: async (req, res) => {
         try {
             const usuario = await Usuario.findById(req.params.id);
+
             if (!usuario) {
-                return res.status(404).json({ mensagem: "Usuário não encontrado" });
+                return res.status(404).json({
+                    mensagem: "Usuário não encontrado"
+                });
             }
+
             return res.status(200).json(usuario);
+
         } catch (error) {
-            return res.status(500).json({ mensagem: "Erro interno ao buscar usuário" });
+            return res.status(500).json({
+                mensagem: "Erro interno ao buscar usuário"
+            });
         }
     },
 
+    // Cadastrar usuário
     create: async (req, res) => {
         try {
             const { nome, email, senha } = req.body;
+
             if (!nome || !email || !senha) {
-                return res.status(400).json({ mensagem: "Todos os campos são obrigatórios" });
+                return res.status(400).json({
+                    mensagem: "Todos os campos são obrigatórios"
+                });
             }
-            const usuario = await Usuario.create({ nome, email, senha });
+
+            const usuario = await Usuario.create({
+                nome,
+                email,
+                senha
+            });
+
             return res.status(201).json(usuario);
+
         } catch (error) {
-            return res.status(500).json({ mensagem: "Erro interno ao criar usuário" });
+            return res.status(500).json({
+                mensagem: "Erro interno ao cadastrar usuário"
+            });
         }
     },
 
+    // Atualizar usuário
     update: async (req, res) => {
         try {
-            const usuario = await Usuario.update(req.params.id, { nome: req.body.nome, email: req.body.email, senha: req.body.senha });
+            const usuario = await Usuario.update(req.params.id, {
+                nome: req.body.nome,
+                email: req.body.email,
+                senha: req.body.senha
+            });
+
+            if (!usuario) {
+                return res.status(404).json({
+                    mensagem: "Usuário não encontrado"
+                });
+            }
+
             return res.status(200).json(usuario);
+
         } catch (error) {
-            return res.status(500).json({ mensagem: "Erro interno ao atualizar usuário" });
+            return res.status(500).json({
+                mensagem: "Erro interno ao atualizar usuário"
+            });
         }
     },
 
+    // Excluir usuário
     delete: async (req, res) => {
         try {
-            await Usuario.delete(req.params.id);
-            return res.status(200).json({ mensagem: "Usuário removido com sucesso!" });
+            const usuario = await Usuario.delete(req.params.id);
+
+            if (!usuario) {
+                return res.status(404).json({
+                    mensagem: "Usuário não encontrado"
+                });
+            }
+
+            return res.status(200).json({
+                mensagem: "Usuário removido com sucesso!"
+            });
+
         } catch (error) {
-            return res.status(500).json({ mensagem: "Erro interno ao remover usuário" });
+            return res.status(500).json({
+                mensagem: "Erro interno ao remover usuário"
+            });
         }
     }
-};  
+};
+
+
+export default usuarioController;

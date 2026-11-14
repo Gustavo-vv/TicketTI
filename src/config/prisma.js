@@ -1,5 +1,5 @@
 import 'dotenv/config';
-import { PrismaClient } from '../generated/prisma/index.js';
+import { PrismaClient } from '../generated/prisma/client.ts';
 import { PrismaMariaDb } from '@prisma/adapter-mariadb';
 import mariadb from 'mariadb';
 
@@ -17,4 +17,7 @@ const pool = mariadb.createPool({
 const adapter = new PrismaMariaDb(pool);
 
 // Instancia o Prisma Client
-export const prisma = new PrismaClient({ adapter });
+const prismaClient = new PrismaClient({ adapter });
+
+export { prismaClient as prisma };   // exporta com o nome "prisma"
+

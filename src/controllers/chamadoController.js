@@ -26,9 +26,10 @@ const chamadoController = {
     try {
       const chamado = await Chamado.create(req.body);
       res.status(201).json(chamado);
-    } catch (error) {
-    res.status(400).json({ message:"Erro ao criar chamado!" });
-    }
+    }  catch (error) {
+  console.error(error);
+  res.status(400).json({ message: "Erro ao criar chamado!", detalhe: error.message });
+}
   },
 
   update: async (req, res) => {
