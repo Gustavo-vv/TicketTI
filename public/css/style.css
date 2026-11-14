@@ -801,4 +801,193 @@ tbody tr:hover {
     }
 }
 
+/* =================================
+   PÁGINA DE USUÁRIOS
+================================= */
+
+.usuarios-page {
+    padding: 30px;
+    width: 100%;
+}
+
+/* Cabeçalho */
+
+.usuarios-page .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 20px;
+}
+
+.usuarios-page .page-header h1 {
+    font-size: 28px;
+    color: #142b4a;
+    margin-bottom: 6px;
+}
+
+.usuarios-page .page-header p {
+    color: #64748b;
+    font-size: 14px;
+}
+
+/* Botão principal */
+
+.usuarios-page .btn-primary {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: 0.2s;
+}
+
+.usuarios-page .btn-primary:hover {
+    background: #1d4ed8;
+}
+
+/* Card da tabela */
+
+.usuarios-page .card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+}
+
+.usuarios-page .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+    gap: 12px;
+}
+
+.usuarios-page .card-header h2 {
+    font-size: 18px;
+    color: #142b4a;
+}
+
+.usuarios-page .card-header span {
+    color: #64748b;
+    font-size: 13px;
+}
+
+/* Tabela */
+
+.usuarios-page .table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.usuarios-page table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.usuarios-page table thead {
+    background: #f8fafc;
+}
+
+.usuarios-page table th {
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 15px;
+}
+
+.usuarios-page table td {
+    padding: 16px 15px;
+    color: #334155;
+    font-size: 14px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.usuarios-page table tbody tr:hover {
+    background: #f8fafc;
+}
+
+/* Botões de ações */
+
+.usuarios-page table td button {
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: 0.2s;
+}
+
+.usuarios-page table td button:first-child {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.usuarios-page table td button:first-child:hover {
+    background: #dbeafe;
+}
+
+.usuarios-page table td button:last-child {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.usuarios-page table td button:last-child:hover {
+    background: #fee2e2;
+}
+
+/* Responsividade */
+
+@media (max-width: 700px) {
+    .usuarios-page {
+        padding: 20px 12px;
+    }
+
+    .usuarios-page .page-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .usuarios-page .card {
+        padding: 15px;
+    }
+
+    .usuarios-page .card-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+/* Botão excluir chamado */
+
+.btn-excluir {
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 7px;
+    background: #fef2f2;
+    color: #dc2626;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-excluir:hover {
+    background: #fee2e2;
+}
+
+.btn-excluir i {
+    font-size: 16px;
+}
+
+
 

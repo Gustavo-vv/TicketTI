@@ -1,6 +1,7 @@
 import { prisma } from '../config/prisma.js';
 
 export class Chamado {
+  
   static async findAll() {
     return await prisma.chamado.findMany({
         include: {
@@ -41,4 +42,5 @@ export class Chamado {
       where: { id: parseInt(id) }
     });
   }
+  
 }

@@ -58,8 +58,33 @@ const paginaController = {
         console.error("Erro ao carregar formulário:", error);
         res.status(500).send("Erro ao carregar formulário de chamado.");
     }
-}
+},
+    usuarios: async (req, res) => {
+        try {
+            const usuarios = await prisma.usuario.findMany({
+                orderBy: { nome: "asc" }
+            });
 
+            res.render("usuarios", { usuarios });
+
+        } catch (error) {
+            console.error("Erro ao carregar usuários:", error);
+            res.status(500).send("Erro ao carregar usuários.");
+        }
+    },
+
+    categorias: async (req, res) => {
+        try {
+            const categorias = await prisma.categoria.findMany({
+                orderBy: { nome: "asc" }
+            });
+
+            res.render("categorias", { categorias });
+
+        } catch (error) {
+            console.error("Erro ao carregar categorias:", error);
+            res.status(500).send("Erro ao carregar categorias.");
+        }
+    }
 };
-
 export default paginaController;

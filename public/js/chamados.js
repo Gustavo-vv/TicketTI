@@ -41,6 +41,40 @@ function filtrarChamados() {
     semResultado.hidden = encontrados !== 0;
 }
 
+async function excluirChamado(botao) {
+
+    const id = botao.dataset.id;
+
+    const confirmar = confirm(
+        `Tem certeza que deseja excluir o chamado #${id}?`
+    );
+
+    if (!confirmar) {
+        return;
+    }
+
+    try {
+
+        await axios.delete(`/chamados/${id}`);
+
+        alert("Chamado excluído com sucesso!");
+
+        window.location.reload();
+
+    } catch (error) {
+
+        console.error("Erro ao excluir chamado:", error);
+
+        alert(
+            error.response?.data?.mensagem ||
+            error.response?.data?.message ||
+            "Erro ao excluir chamado."
+        );
+
+    }
+}
+
+
 pesquisa.addEventListener("input", filtrarChamados);
 filtroStatus.addEventListener("change", filtrarChamados);
 filtroPrioridade.addEventListener("change", filtrarChamados);

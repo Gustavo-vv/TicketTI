@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Categorias | TicketTI</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="layout">
+
+        <%- include('partials/sidebar', { paginaAtiva: 'categorias' }) %>
+
+        <main class="main-content">
+
+            <div class="content usuarios-page">
+
+                <div class="page-header">
+                    <div>
+                        <h1>Categorias</h1>
+                        <p>Gerencie as categorias dos chamados.</p>
+                    </div>
+
+                    <button class="btn-primary" onclick="abrirModal()">
+                        <i class="bi bi-plus-lg"></i>
+                        Nova categoria
+                    </button>
+                </div>
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h2>Lista de categorias</h2>
+                        <span><%= categorias.length %> categorias cadastradas</span>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <% if (categorias.length === 0) { %>
+                                    <tr>
+                                        <td colspan="3">Nenhuma categoria cadastrada.</td>
+                                    </tr>
+                                <% } %>
+
+                                <% categorias.forEach(categoria => { %>
+                                    <tr>
+                                        <td><%= categoria.id %></td>
+                                        <td><%= categoria.nome %></td>
+
+                                        <td>
+                                            <button onclick="editarCategoria(this)"
+                                                data-id="<%= categoria.id %>"
+                                                data-nome="<%= categoria.nome %>">
+                                                <i class="bi bi-pencil"></i>
+                                            </button>
+
+                                            <button onclick="excluirCategoria(this)"
+                                                data-id="<%= categoria.id %>">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/categorias.js"></script>
+
+</body>
+</html>

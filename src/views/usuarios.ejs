@@ -5,10 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>TicketTI | Dashboard</title>
+    <title>Usuários | TicketTI</title>
 
     <link rel="stylesheet" href="/css/style.css">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 </head>
 
@@ -16,284 +15,80 @@
 
     <div class="layout">
 
-        <aside class="sidebar">
+        <%- include('partials/sidebar', { paginaAtiva: 'usuarios' }) %>
 
-            <div class="brand">
-                <div class="brand-icon">
-                    <i class="bi bi-headset"></i>
-                </div>
-
-                <span>Ticket<span class="brand-highlight">TI</span></span>
-            </div>
-
-            <div class="menu-label">MENU PRINCIPAL</div>
-
-            <nav class="menu">
-                <a href="/" class="menu-item active">
-                    <i class="bi bi-grid-1x2-fill"></i>
-                    <span>Dashboard</span>
-                </a>
-
-                <a href="/chamados" class="menu-item">
-                    <i class="bi bi-ticket-perforated"></i>
-                    <span>Chamados</span>
-                </a>
-
-                <a href="/usuarios" class="menu-item">
-                    <i class="bi bi-people"></i>
-                    <span>Usuários</span>
-                </a>
-
-                <a href="/categorias" class="menu-item">
-                    <i class="bi bi-tags"></i>
-                    <span>Categorias</span>
-                </a>
-            </nav>
-
-            <div class="sidebar-bottom">
-                <div class="profile-icon">
-                    <i class="bi bi-person-fill"></i>
-                </div>
-
-                <div class="profile-info">
-                    <strong>Administrador</strong>
-                    <small>Suporte TI</small>
-                </div>
-
-                <i class="bi bi-three-dots"></i>
-            </div>
-
-        </aside>
-
-       
         <main class="main-content">
 
-            <header class="topbar">
+            <div class="content usuarios-page">
 
-                <div>
-                    <h2>Dashboard</h2>
-                    <p>Gerencie e acompanhe os chamados de suporte.</p>
-                </div>
+                <div class="page-header">
+                    <div>
+                        <h1>Usuários</h1>
+                        <p>Gerencie os usuários do sistema.</p>
+                    </div>
 
-                <div class="topbar-actions">
-                    <span class="today">
-                        <i class="bi bi-calendar3"></i>
-                        <span id="dataAtual"></span>
-                    </span>
-
-                    <button class="notification">
-                        <i class="bi bi-bell"></i>
+                    <button class="btn-primary" onclick="abrirModal()">
+                        <i class="bi bi-plus-lg"></i>
+                        Novo usuário
                     </button>
                 </div>
 
-            </header>
+                <div class="card">
 
-            <section class="content">
-
-                <div class="welcome">
-                    <div>
-                        <h2>Olá, administrador! 👋</h2>
-                        <p>Aqui está o resumo dos atendimentos do sistema.</p>
-                    </div>
-
-                    <a href="/chamados/create" class="primary-button">
-                        <i class="bi bi-plus-lg"></i>
-                        Novo chamado
-                    </a>
-                </div>
-
-             
-                <div class="stats-grid">
-
-                    <div class="stat-card">
-                        <div class="stat-top">
-                            <span>Total de chamados</span>
-                            <div class="stat-icon icon-blue">
-                                <i class="bi bi-ticket-detailed"></i>
-                            </div>
-                        </div>
-
-                        <h2><%= total %></h2>
-                        <small>Chamados cadastrados</small>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-top">
-                            <span>Chamados abertos</span>
-                            <div class="stat-icon icon-orange">
-                                <i class="bi bi-clock-history"></i>
-                            </div>
-                        </div>
-
-                        <h2><%= abertos %></h2>
-                        <small>Aguardando atendimento</small>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-top">
-                            <span>Em andamento</span>
-                            <div class="stat-icon icon-purple">
-                                <i class="bi bi-arrow-repeat"></i>
-                            </div>
-                        </div>
-
-                        <h2><%= emAndamento %></h2>
-                        <small>Em atendimento</small>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-top">
-                            <span>Resolvidos</span>
-                            <div class="stat-icon icon-green">
-                                <i class="bi bi-check-circle"></i>
-                            </div>
-                        </div>
-
-                        <h2><%= resolvidos %></h2>
-                        <small>Atendimentos concluídos</small>
-                    </div>
-
-                </div>
-
-          
-                <section class="table-card">
-
-                    <div class="table-header">
-
-                        <div>
-                            <h3>Chamados recentes</h3>
-                            <p>Visualize e atualize os atendimentos.</p>
-                        </div>
-
-                        <div class="search-box">
-                            <i class="bi bi-search"></i>
-                            <input
-                                type="text"
-                                id="pesquisa"
-                                placeholder="Pesquisar chamado..."
-                            >
-                        </div>
-
+                    <div class="card-header">
+                        <h2>Lista de usuários</h2>
+                        <span><%= usuarios.length %> usuários cadastrados</span>
                     </div>
 
                     <div class="table-responsive">
-
                         <table>
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>CHAMADO</th>
-                                    <th>USUÁRIO</th>
-                                    <th>CATEGORIA</th>
-                                    <th>PRIORIDADE</th>
-                                    <th>STATUS</th>
-                                    <th>ATUALIZAR</th>
+                                    <th>Nome</th>
+                                    <th>E-mail</th>
+                                    <th>Ações</th>
                                 </tr>
                             </thead>
 
-                            <tbody id="tabelaChamados">
-
-                                <% chamados.forEach(chamado => { %>
-
-                                    <tr class="linha-chamado">
-
-                                        <td class="ticket-id">
-                                            #<%= chamado.id %>
-                                        </td>
-
-                                        <td>
-                                            <strong class="ticket-title">
-                                                <%= chamado.titulo %>
-                                            </strong>
-                                            <small class="ticket-date">
-                                                <%= new Date(chamado.criadoEm).toLocaleDateString('pt-BR') %>
-                                            </small>
-                                        </td>
-
-                                        <td>
-                                            <%= chamado.usuario.nome %>
-                                        </td>
-
-                                        <td>
-                                            <%= chamado.categoria.nome %>
-                                        </td>
-
-                                        <td>
-                                            <span class="priority priority-<%= chamado.prioridade.toLowerCase() %>">
-                                                <%= chamado.prioridade.replace('_', ' ') %>
-                                            </span>
-                                        </td>
-
-                                        <td>
-                                            <span
-                                                class="status status-<%= chamado.status.toLowerCase() %>"
-                                                id="status-<%= chamado.id %>"
-                                            >
-                                                <%= chamado.status.replace('_', ' ') %>
-                                            </span>
-                                        </td>
-
-                                        <td>
-                                            <select
-                                                class="status-select"
-                                                data-id="<%= chamado.id %>"
-                                                data-status="<%= chamado.status %>"
-                                            >
-                                                <option value="ABERTO"
-                                                    <%= chamado.status === 'ABERTO' ? 'selected' : '' %>>
-                                                    Aberto
-                                                </option>
-
-                                                <option value="EM_ANDAMENTO"
-                                                    <%= chamado.status === 'EM_ANDAMENTO' ? 'selected' : '' %>>
-                                                    Em andamento
-                                                </option>
-
-                                                <option value="RESOLVIDO"
-                                                    <%= chamado.status === 'RESOLVIDO' ? 'selected' : '' %>>
-                                                    Resolvido
-                                                </option>
-                                            </select>
-                                        </td>
-                                    </tr>
-
-                                <% }) %>
-
-                                <% if (chamados.length === 0) { %>
+                            <tbody>
+                                <% if (usuarios.length === 0) { %>
                                     <tr>
-                                        <td colspan="7" class="empty-message">
-                                            <i class="bi bi-inbox"></i>
-                                            <p>Nenhum chamado cadastrado ainda.</p>
-                                        </td>
+                                        <td colspan="4">Nenhum usuário cadastrado.</td>
                                     </tr>
                                 <% } %>
 
+                                <% usuarios.forEach(usuario => { %>
+                                    <tr>
+                                        <td><%= usuario.id %></td>
+                                        <td><%= usuario.nome %></td>
+                                        <td><%= usuario.email %></td>
+
+                                        <td>
+                                        <button onclick="editarUsuario(this)" data-id="<%= usuario.id %>">
+                                         <i class="bi bi-pencil"></i>
+                                        </button>
+
+                                        <button onclick="excluirUsuario(this)" data-id="<%= usuario.id %>">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                        </td>
+                                    </tr>
+                                <% }) %>
                             </tbody>
                         </table>
-
                     </div>
 
-                    <div class="table-footer">
-                        <span>
-                            Total de <strong><%= total %></strong> chamados
-                        </span>
-                    </div>
+                </div>
 
-                </section>
-
-                <div id="toast" class="toast-message"></div>
-
-                <footer class="footer">
-                    TicketTI © 2026 - Sistema de Gerenciamento de Chamados
-                </footer>
-
-            </section>
+            </div>
 
         </main>
 
     </div>
 
-    <script src="/js/dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/js/usuarios.js"></script>
 
 </body>
 </html>
