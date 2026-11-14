@@ -32,14 +32,32 @@ class CategoriaController {
     }
   };
 
-  delete = async (req, res) => {
+  
+delete = async (req, res) => {
     try {
-      await Categoria.delete(req.params.id);
-      return res.status(200).json({ mensagem: "Categoria removida com sucesso!" });
+        const id = Number(req.params.id);
+
+        if (!id || isNaN(id)) {
+            return res.status(400).json({
+                mensagem: "ID da categoria inválido"
+            });
+        }
+
+        await Categoria.delete(id);
+
+        return res.status(200).json({
+            mensagem: "Categoria removida com sucesso!"
+        });
+
     } catch (error) {
-      return res.status(500).json({ mensagem: "Erro interno ao remover categoria" });
+        console.error("ERRO AO REMOVER CATEGORIA:", error);
+
+        return res.status(500).json({
+            mensagem: "Erro interno ao remover categoria",
+            detalhe: error.message
+        });
     }
-  };
 }
+};
 
 export default new CategoriaController();

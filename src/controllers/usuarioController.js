@@ -37,54 +37,53 @@ const usuarioController = {
     },
 
     // Cadastrar usuário
-    create: async (req, res) => {
-        try {
-            const { nome, email, senha } = req.body;
+        
+create: async (req, res) => {
+    try {
+        const { nome, email } = req.body;
 
-            if (!nome || !email || !senha) {
-                return res.status(400).json({
-                    mensagem: "Todos os campos são obrigatórios"
-                });
-            }
-
-            const usuario = await Usuario.create({
-                nome,
-                email,
-                senha
-            });
-
-            return res.status(201).json(usuario);
-
-        } catch (error) {
-            return res.status(500).json({
-                mensagem: "Erro interno ao cadastrar usuário"
+        if (!nome || !email) {
+            return res.status(400).json({
+                mensagem: "Todos os campos são obrigatórios"
             });
         }
-    },
+
+        const usuario = await Usuario.create({
+            nome,
+            email
+        });
+
+        return res.status(201).json(usuario);
+
+    } catch (error) {
+        console.error("Erro ao cadastrar usuário:", error);
+
+        return res.status(500).json({
+            mensagem: "Erro interno ao cadastrar usuário"
+        });
+    }
+},
+
 
     // Atualizar usuário
-    update: async (req, res) => {
-        try {
-            const usuario = await Usuario.update(req.params.id, {
-                nome: req.body.nome,
-                email: req.body.email,
-                senha: req.body.senha
-            });
+   
+update: async (req, res) => {
+    try {
+        const usuario = await Usuario.update(req.params.id, {
+            nome: req.body.nome,
+            email: req.body.email
+        });
 
-            if (!usuario) {
-                return res.status(404).json({
-                    mensagem: "Usuário não encontrado"
-                });
-            }
+        return res.status(200).json(usuario);
 
-            return res.status(200).json(usuario);
+    } catch (error) {
+        console.error("Erro ao atualizar usuário:", error);
 
-        } catch (error) {
-            return res.status(500).json({
-                mensagem: "Erro interno ao atualizar usuário"
-            });
-        }
-    },
+        return res.status(500).json({
+            mensagem: "Erro interno ao atualizar usuário"
+        });
+    }
+},
 
     // Excluir usuário
     delete: async (req, res) => {
@@ -107,7 +106,6 @@ const usuarioController = {
             });
         }
     }
-};
-
+    };
 
 export default usuarioController;

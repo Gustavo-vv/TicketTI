@@ -21,6 +21,12 @@ export class Chamado {
       data
     });
   }
+  static async updateStatus(id, status) {
+    return await prisma.chamado.update({
+      where: { id: parseInt(id) },
+      data: { status }
+    });
+  }
 
   static async delete(id) {
     return await prisma.chamado.delete({

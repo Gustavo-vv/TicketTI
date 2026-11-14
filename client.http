@@ -1,6 +1,5 @@
 @baseUrl = http://localhost:3000
 
-### ========== CATEGORIAS ==========
 
 ### Criar categoria
 # @name criarCategoria
@@ -22,8 +21,6 @@ Content-Type: application/json
   "nome": "Hardware e Periféricos"
 }
 
-### ========== USUÁRIOS ==========
-
 ### Criar usuário
 # @name criarUsuario
 POST {{baseUrl}}/usuarios/create
@@ -31,36 +28,35 @@ Content-Type: application/json
 
 {
   
-  "nome": "Gustavo Velosow",
-  "email": "gustavo3232@email.com",
-  "senha": "1234563d2@#"
+  "nome": "Gustavo Velosod",
+  "email": "gustavod@email.com"
+  
 }
 
 ### Listar usuários
 GET {{baseUrl}}/usuarios
 
 ### Atualizar usuário
-PUT {{baseUrl}}/usuarios/{{criarUsuario.response.body.id}}
+PUT {{baseUrl}}/usuarios/3
 Content-Type: application/json
 
 {
   "nome": "Gustavo Vieira Veloso",
-  "email": "gustavo@email.com"
+  "email": "gustav31231231o@email.com"
 }
 
-### ========== CHAMADOS ==========
 
 ### Criar chamado
 # @name criarChamado
-POST {{baseUrl}}/chamados
+POST {{baseUrl}}/chamados/create
 Content-Type: application/json
 
 {
   "titulo": "Notebook com defeito",
   "descricao": "Notebook não liga e apresenta tela azul",
   "prioridade": "ALTA",
-  "usuarioId": {{criarUsuario.response.body.id}},
-  "categoriaId": {{criarCategoria.response.body.id}}
+  "usuarioId":1,
+  "categoriaId": 1
 }
 
 ### Listar chamados
@@ -78,11 +74,11 @@ Content-Type: application/json
 
 {
   "titulo": "Notebook com defeito (atualizado)",
-  "descricao": "Notebook não liga e apresenta tela azul",
+  "descricao": "Notebook ndwdão liga e apresenta tela azul",
   "prioridade": "URGENTE"
 }
 
-### Mudar status: ABERTO para EM_ANDAMENTO
+### Mudar status:
 PATCH {{baseUrl}}/chamados/{{criarChamado.response.body.id}}/status
 Content-Type: application/json
 
@@ -90,7 +86,7 @@ Content-Type: application/json
   "status": "EM_ANDAMENTO"
 }
 
-### Mudar status: EM_ANDAMENTO para RESOLVIDO
+### Mudar status: 
 PATCH {{baseUrl}}/chamados/{{criarChamado.response.body.id}}/status
 Content-Type: application/json
 
@@ -98,15 +94,13 @@ Content-Type: application/json
   "status": "RESOLVIDO"
 }
 
-### Teste do fluxo inválido (deve dar erro 400)
+### Mudar status: 
 PATCH {{baseUrl}}/chamados/{{criarChamado.response.body.id}}/status
 Content-Type: application/json
 
 {
   "status": "ABERTO"
 }
-
-### ========== EXCLUSÕES (rode por último) ==========
 
 ### Deletar chamado
 DELETE {{baseUrl}}/chamados/{{criarChamado.response.body.id}}
